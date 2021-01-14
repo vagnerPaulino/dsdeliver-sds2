@@ -70,21 +70,22 @@ function OrderLocation({ onChangeLocation }: Props) {
             onChange={(value) => handleChangeSelect(value as Place)}
           />
         </div>
+        <MapContainer
+          className="leaflet-container"
+          center={address.position}
+          zoom={15}
+          key={address.position.lat}
+          scrollWheelZoom
+        >
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={address.position}>
+            <Popup>{address.label}</Popup>
+          </Marker>
+        </MapContainer>
       </div>
-      <MapContainer
-        center={address.position}
-        zoom={15}
-        key={address.position.lat}
-        scrollWheelZoom
-      >
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={address.position}>
-          <Popup>{address.label}</Popup>
-        </Marker>
-      </MapContainer>
     </div>
   );
 }
